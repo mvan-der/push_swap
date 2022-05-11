@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstadd_front.c                                  :+:    :+:            */
+/*   ft_lstmap.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mvan-der <mvan-der@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/15 13:11:18 by mvan-der      #+#    #+#                 */
-/*   Updated: 2020/11/16 09:11:10 by mvan-der      ########   odam.nl         */
+/*   Created: 2020/11/15 16:17:11 by mvan-der      #+#    #+#                 */
+/*   Updated: 2022/05/11 14:01:00 by mvan-der      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	new->next = *lst;
-	*lst = new;
+	t_list	*newlst;
+	t_list	*newelem;
+
+	if (!lst || !f)
+		return (NULL);
+	newlst = NULL;
+	while (lst)
+	{
+		newelem = ft_lstnew(f(lst->content));
+		if (!newelem)
+		{
+			ft_lstclear(&newlst, del);
+			return (NULL);
+		}
+		lst = lst->next;
+		ft_lstadd_back(&newlst, newelem);
+	}
+	return (newlst);
 }

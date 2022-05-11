@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstclear.c                                      :+:    :+:            */
+/*   ft_lstdelone.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mvan-der <mvan-der@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/15 15:33:16 by mvan-der      #+#    #+#                 */
-/*   Updated: 2021/03/09 16:15:47 by mvan-der      ########   odam.nl         */
+/*   Created: 2020/11/15 15:19:53 by mvan-der      #+#    #+#                 */
+/*   Updated: 2022/05/11 14:00:52 by mvan-der      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 #include <stdlib.h>
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	t_list	*temp;
-
 	if (!lst)
 		return ;
-	while (*lst)
-	{
-		temp = *lst;
-		del((*lst)->content);
-		*lst = temp->next;
-		free(temp);
-	}
-	*lst = 0;
+	del(lst->content);
+	free(lst);
 }

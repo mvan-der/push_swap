@@ -6,7 +6,7 @@
 #    By: mvan-der <mvan-der@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/12/16 16:32:49 by mvan-der      #+#    #+#                  #
-#    Updated: 2022/05/10 14:09:39 by mvan-der      ########   odam.nl          #
+#    Updated: 2022/05/11 14:00:19 by mvan-der      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LIBFTPRINTF = ./ft_printf/libftprintf.a
 
 SRCDIR = src/
 OBJDIR = obj/
-SRC = 
+SRC = ft_list_funcs.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstmap.c ft_lstsize.c linked_lists.c
 OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
 
 all: $(NAME)
