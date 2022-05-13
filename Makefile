@@ -6,7 +6,7 @@
 #    By: mvan-der <mvan-der@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/12/16 16:32:49 by mvan-der      #+#    #+#                  #
-#    Updated: 2022/05/11 14:00:19 by mvan-der      ########   odam.nl          #
+#    Updated: 2022/05/13 10:25:00 by mvan-der      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ $(LIBFTPRINTF):
 	$(MAKE) -C ./ft_printf
 
 clean:
-	rm -f $(SRCOBJ)
+	rm -rf $(OBJDIR)
 	@echo "${GRN}[CLEAN]${RST}"
 
 fclean: clean
