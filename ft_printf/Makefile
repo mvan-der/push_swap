@@ -6,7 +6,7 @@
 #    By: mvan-der <mvan-der@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/06 13:44:38 by mvan-der      #+#    #+#                  #
-#    Updated: 2022/03/17 14:12:19 by mvan-der      ########   odam.nl          #
+#    Updated: 2022/05/17 16:01:11 by mvan-der      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ $(LIBFT):
 
 clean:
 	rm -f $(SRCOBJ)
+	$(MAKE) -C ./libft $@
 
 fclean: clean
 	rm -f $(NAME)

@@ -6,12 +6,13 @@
 /*   By: mvan-der <mvan-der@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/10 14:11:43 by mvan-der      #+#    #+#                 */
-/*   Updated: 2022/05/11 16:05:10 by mvan-der      ########   odam.nl         */
+/*   Updated: 2022/05/17 16:28:20 by mvan-der      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
+#include <ctype.h>
 
 void	delete_first(t_list **test)
 {
@@ -41,14 +42,23 @@ void	printlist_prev(t_list *test)
 	}
 }
 
+void	err_msg(char *str)
+{
+	write(STDERR_FILENO, str, ft_strlen(str));
+	exit(EXIT_FAILURE);
+}
+
 int	main(int argc, char **argv)
 {
-	// size_t		a[10] = {8,2,3,9,-1,947,44,5,-111,117};
+	if (argc == 1)
+		err_msg(ERR_MSG);
 	int		i = 0;
 	t_list	**test;
 	test = malloc(sizeof(t_list) * sizeof(t_list));
 	while (i < (argc - 1))
 	{
+		if (!argv_check(argv[i+1]))
+			err_msg(ERR_MSG);
 		if (i == 0)
 		{
 			test[i] = ft_lstnew((void *)argv[i+1]);
@@ -63,7 +73,6 @@ int	main(int argc, char **argv)
 	ft_printf("\n");
 	ft_printf("Backward:\n");
 	printlist_prev(ft_lstlast(test[0]));
-	
 	// printlist_next(test[4]);
 	// test[10] = ft_lstnew((void *)211);
 	// ft_lstadd_front(test, test[10]);
@@ -71,7 +80,9 @@ int	main(int argc, char **argv)
 	// ft_printf("\n");
 	// printlist_prev(ft_lstlast(test[0]));
 	// ft_printf("Removed an element?\n");
-	
+	char *str = argv[3];
+	int d = argv_check(str);
+	ft_printf("arg checker? %i\n", d);
 
 
 	return (0);

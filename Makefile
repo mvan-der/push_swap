@@ -6,7 +6,7 @@
 #    By: mvan-der <mvan-der@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/12/16 16:32:49 by mvan-der      #+#    #+#                  #
-#    Updated: 2022/05/13 10:25:00 by mvan-der      ########   odam.nl          #
+#    Updated: 2022/05/17 16:02:30 by mvan-der      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LIBFTPRINTF = ./ft_printf/libftprintf.a
 
 SRCDIR = src/
 OBJDIR = obj/
-SRC = ft_list_funcs.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstmap.c ft_lstsize.c linked_lists.c
+SRC = ft_list_funcs.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstmap.c ft_lstsize.c linked_lists.c input_check.c
 OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
 
 all: $(NAME)
@@ -46,6 +46,7 @@ $(LIBFTPRINTF):
 
 clean:
 	rm -rf $(OBJDIR)
+	$(MAKE) -C ./ft_printf $@
 	@echo "${GRN}[CLEAN]${RST}"
 
 fclean: clean

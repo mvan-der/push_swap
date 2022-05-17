@@ -6,14 +6,17 @@
 /*   By: mvan-der <mvan-der@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/10 14:09:42 by mvan-der      #+#    #+#                 */
-/*   Updated: 2022/05/11 14:33:25 by mvan-der      ########   odam.nl         */
+/*   Updated: 2022/05/17 15:46:07 by mvan-der      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# define ERR_MSG "Error\n"
+
 #include "../ft_printf/ft_printf.h"
+
 
 typedef struct s_list
 {
@@ -33,5 +36,6 @@ void			ft_lstclear(t_list **lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), \
 void (*del)(void *));
+int argv_check(char *argv);
 
 #endif
