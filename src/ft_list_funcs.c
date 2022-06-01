@@ -6,7 +6,7 @@
 /*   By: mvan-der <mvan-der@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/15 13:59:57 by mvan-der      #+#    #+#                 */
-/*   Updated: 2022/05/11 14:27:27 by mvan-der      ########   odam.nl         */
+/*   Updated: 2022/06/01 14:12:27 by mvan-der      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_list	*ft_lstlast(t_list *lst)
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	t_list *first;
+	t_list	*first;
 
 	if (!*lst)
 	{
@@ -40,9 +40,9 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 		return ;
 	}
 	first = malloc(sizeof(t_list));
-	if(!first)
-		return ;//?? void so just return? or exit? needs to be handled somehow rihgt?
-	first = ft_lstfirst(*lst); 
+	if (!first)
+		return ;
+	first = ft_lstfirst(*lst);
 	new->next = first;
 	new->prev = NULL;
 	first->prev = new;
@@ -59,7 +59,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	}
 	last = malloc(sizeof(t_list));
 	if (!last)
-		return ; // same thoughts as lst_add_front... needs to be handled somehow
+		return ;
 	last = ft_lstlast(*lst);
 	last->next = new;
 	new->prev = last;

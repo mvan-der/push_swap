@@ -6,7 +6,7 @@
 /*   By: mvan-der <mvan-der@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/10 14:09:42 by mvan-der      #+#    #+#                 */
-/*   Updated: 2022/05/17 15:46:07 by mvan-der      ########   odam.nl         */
+/*   Updated: 2022/06/01 12:24:19 by mvan-der      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void			ft_lstclear(t_list **lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), \
 void (*del)(void *));
-int argv_check(char *argv);
+int argv_check(char *argv, t_list *test);
 
 #endif
