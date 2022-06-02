@@ -6,7 +6,7 @@
 /*   By: mvan-der <mvan-der@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/10 14:09:42 by mvan-der      #+#    #+#                 */
-/*   Updated: 2022/06/01 14:40:15 by mvan-der      ########   odam.nl         */
+/*   Updated: 2022/06/02 11:07:56 by mvan-der      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), \
 void (*del)(void *));
 int			argv_check(char *argv, t_list *test);
 void		init_stack(t_list **stack, int argc, char **argv);
-int	err_msg(char *str);
-
+int			err_msg(char *str);
 #endif

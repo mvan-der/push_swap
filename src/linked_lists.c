@@ -6,7 +6,7 @@
 /*   By: mvan-der <mvan-der@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/10 14:11:43 by mvan-der      #+#    #+#                 */
-/*   Updated: 2022/06/01 16:19:30 by mvan-der      ########   odam.nl         */
+/*   Updated: 2022/06/02 12:10:47 by mvan-der      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,29 @@ int	err_msg(char *str)
 	exit(EXIT_FAILURE);
 }
 
+void	swap(t_list *a)
+{
+	t_list	*b = NULL;
+	t_list	*saved_prev = a -> prev;
+	t_list	*saved_next = a -> next;
+
+	a -> next = b -> next;
+	a -> prev = b -> prev;
+
+	if(b -> next)
+		(b -> next) -> prev = a;
+	if(b -> prev)
+		(b -> prev) -> next = a;
+
+	if(saved_prev)
+		saved_prev -> next = b;
+	if(saved_next)
+		saved_next -> prev = b;
+
+	b -> prev = saved_prev;
+	b -> next = saved_next;
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	**stack_a;
@@ -56,36 +79,37 @@ int	main(int argc, char **argv)
 	// t_list	*last_a = NULL;
 
 	if (argc == 1)
-		err_msg(ERR_MSG);
+		exit(EXIT_FAILURE);;
 	stack_a = malloc(sizeof(t_list) * sizeof(t_list));
 	init_stack(stack_a, argc, argv);
-	head_a = stack_a[0];
+	head_a = ft_lstfirst(*stack_a);
 	// last_a = ft_lstlast(head_a);
 	ft_printf("Forward:\n");
-	ft_printf("\n");
-	// ft_printf("Backward:\n");
-
 	printlist_next(head_a);
-
+	ft_printf("\n");
+	ft_printf("Backward:\n");
+	printlist_prev(ft_lstlast(head_a));
 	ft_printf("\n");
 
 	// swap top elements
 	// head + head->next
-	t_list	*temp = NULL;
-	t_list	*temp2 = NULL;
-	t_list	*temp3 = NULL;
+	// t_list	*temp = NULL;
+	// t_list	*temp2 = NULL;
+	// t_list	*temp3 = NULL;
 
-	temp = head_a;
-	temp2 = head_a->next;
-	temp3 = head_a->prev;
-	ft_printf("Forward:\n");
-	head_a->next = temp;
-	head_a = temp2;
-	head_a->prev = temp3;
-	printlist_next(head_a);
-	ft_printf("\n");
-	ft_printf("Backward:\n");
-	printlist_prev(head_a);
+	// swap(head_a);
+	// ft_printf("Forward:\n");
+	// printlist_next(head_a);
+	// ft_printf("\n");
+	// temp3 = head_a->prev;
+	// head_a->next = temp;
+	// head_a = temp2;
+	// head_a->prev = temp3;
+	// ft_printf("Forward:\n");
+	// printlist_next(head_a);
+	// ft_printf("\n");
+	// ft_printf("Backward:\n");
+	// printlist_prev(head_a);
 	/* printlist_next(stack_a[4]);
 	// stack_a[10] = ft_lstnew((void *)211);
 	// ft_lstadd_front(stack_a, stack_a[10]);
@@ -93,9 +117,6 @@ int	main(int argc, char **argv)
 	// ft_printf("\n");
 	// printlist_prev(ft_lstlast(stack_a[0]));
 	// ft_printf("Removed an element?\n");
-	// char *str = argv[1];
-	// int d = argv_check(str, stack_a[0]);
-	// ft_printf("arg checker? %i\n", d);
 	*/
 	return (0);
 }
