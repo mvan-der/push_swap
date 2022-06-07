@@ -6,10 +6,11 @@
 /*   By: mvan-der <mvan-der@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 10:34:50 by mvan-der      #+#    #+#                 */
-/*   Updated: 2022/05/17 16:41:31 by mvan-der      ########   odam.nl         */
+/*   Updated: 2022/06/07 13:49:56 by mvan-der      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stddef.h>
 #include <limits.h>
 
@@ -37,12 +38,12 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	number = 0;
-	while (nptr[i] != '\0' && (nptr[i] >= '0' && nptr[i] <= '9'))
+	while (nptr[i] != '\0' && ft_isdigit(nptr[i]))
 	{
 		number = number * 10 + (nptr[i] - '0');
 		i++;
 	}
-	if (ft_minmax(number) == -1)
+	if (ft_minmax(sign * number) == -1)
 		return (-1);
 	return (sign * number);
 }

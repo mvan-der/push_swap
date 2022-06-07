@@ -6,7 +6,7 @@
 /*   By: mvan-der <mvan-der@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/15 13:59:57 by mvan-der      #+#    #+#                 */
-/*   Updated: 2022/06/01 14:12:27 by mvan-der      ########   odam.nl         */
+/*   Updated: 2022/06/07 15:47:25 by mvan-der      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	new->prev = last;
 }
 
-t_list	*ft_lstnew(void *content)
+t_list	*ft_lstnew(int content)
 {
 	t_list	*newelem;
 
@@ -76,4 +76,19 @@ t_list	*ft_lstnew(void *content)
 	newelem->next = NULL;
 	newelem->prev = NULL;
 	return (newelem);
+}
+
+void	ft_lstclear(t_list **lst)
+{
+	t_list	*temp;
+
+	if (!lst)
+		return ;
+	while (*lst)
+	{
+		temp = *lst;
+		*lst = temp->next;
+		free(temp);
+	}
+	*lst = 0;
 }

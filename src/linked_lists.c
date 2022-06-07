@@ -6,7 +6,7 @@
 /*   By: mvan-der <mvan-der@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/10 14:11:43 by mvan-der      #+#    #+#                 */
-/*   Updated: 2022/06/02 12:10:47 by mvan-der      ########   odam.nl         */
+/*   Updated: 2022/06/07 16:17:07 by mvan-der      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,109 +14,88 @@
 #include <stdio.h>
 #include <ctype.h>
 
-void	delete_first(t_list **stack)
+void	delete_first(t_list **stack, t_list *del)
 {
-	t_list	*temp;
-
-	temp = ft_lstfirst(*stack);
-	/*hmm
-	*/
-	temp->next = NULL;
-	free(temp);
+	*stack = del->next;
+	if (del->next != NULL)
+		del->next->prev = del->prev;
+	if (del->prev != NULL)
+		del->prev->next = del->next;
+	free(del);
 }
 
-void	printlist_next(t_list *stack)
+void	delete_last(t_list **stack, t_list *del)
 {
-	while (stack != NULL)
-	{
-		ft_printf("%s\n", (char *)stack->content);
-		stack = stack->next;
-	}
-}
-
-void	printlist_prev(t_list *stack)
-{
-	while (stack != NULL)
-	{
-		ft_printf("%s\n", (char *)stack->content);
-		stack = stack->prev;
-	}
-}
-
-int	err_msg(char *str)
-{
-	write(STDERR_FILENO, str, ft_strlen(str));
-	exit(EXIT_FAILURE);
-}
-
-void	swap(t_list *a)
-{
-	t_list	*b = NULL;
-	t_list	*saved_prev = a -> prev;
-	t_list	*saved_next = a -> next;
-
-	a -> next = b -> next;
-	a -> prev = b -> prev;
-
-	if(b -> next)
-		(b -> next) -> prev = a;
-	if(b -> prev)
-		(b -> prev) -> next = a;
-
-	if(saved_prev)
-		saved_prev -> next = b;
-	if(saved_next)
-		saved_next -> prev = b;
-
-	b -> prev = saved_prev;
-	b -> next = saved_next;
+	t_list *temp;
+	
+	temp = ft_lstlast(*stack);
+	temp->prev->next = NULL;
+	free(del);
 }
 
 int	main(int argc, char **argv)
 {
 	t_list	**stack_a;
+	t_list	**stack_b;
 	t_list	*head_a = NULL;
-	// t_list	*last_a = NULL;
+	t_list	*head_b = NULL;
 
 	if (argc == 1)
-		exit(EXIT_FAILURE);;
+		exit(EXIT_FAILURE);
 	stack_a = malloc(sizeof(t_list) * sizeof(t_list));
-	init_stack(stack_a, argc, argv);
+	stack_b = malloc(sizeof(t_list) * sizeof(t_list));
+	stack_a = init_stack_a(stack_a, argv); //uses malloc internally
 	head_a = ft_lstfirst(*stack_a);
-	// last_a = ft_lstlast(head_a);
-	ft_printf("Forward:\n");
-	printlist_next(head_a);
+	ft_printf("address head a: %p\n", &head_a);
+	while (*stack_a)
+	{
+		ft_printf("stack pointers: %p\n", &stack_a);
+		stack_a++;
+	}
+	ft_printf("Stack a\n");
+	ft_printf("Before top swap:\n");
+	printlist_next(ft_lstfirst(*stack_a));
 	ft_printf("\n");
-	ft_printf("Backward:\n");
 	printlist_prev(ft_lstlast(head_a));
 	ft_printf("\n");
-
-	// swap top elements
-	// head + head->next
-	// t_list	*temp = NULL;
-	// t_list	*temp2 = NULL;
-	// t_list	*temp3 = NULL;
-
-	// swap(head_a);
-	// ft_printf("Forward:\n");
-	// printlist_next(head_a);
-	// ft_printf("\n");
-	// temp3 = head_a->prev;
-	// head_a->next = temp;
-	// head_a = temp2;
-	// head_a->prev = temp3;
-	// ft_printf("Forward:\n");
-	// printlist_next(head_a);
-	// ft_printf("\n");
-	// ft_printf("Backward:\n");
-	// printlist_prev(head_a);
-	/* printlist_next(stack_a[4]);
-	// stack_a[10] = ft_lstnew((void *)211);
-	// ft_lstadd_front(stack_a, stack_a[10]);
-	// ft_printf("Added a new element?\n");
-	// ft_printf("\n");
-	// printlist_prev(ft_lstlast(stack_a[0]));
-	// ft_printf("Removed an element?\n");
-	*/
+	if(head_a->next)
+	{
+		swap_top(ft_lstfirst(*stack_a), head_a->next);
+		head_a = ft_lstfirst(*stack_a);
+	}
+	ft_printf("After top swap:\n");
+	printlist_next(head_a);
+	ft_printf("\n");
+	//push top a to top b;
+	//copy first node in a to b, update head_b;
+	ft_printf("Push top a to top b\n");
+	push_top(stack_b, head_a); //uses malloc internally
+	head_b = ft_lstfirst(*stack_b);
+	ft_printf("address head b: %p\n", &head_b);
+	ft_printf("Stack b\n");
+	printlist_next(head_b);
+	ft_printf("\n");
+	//delete first node in a and update head_a;
+	delete_first(stack_a, head_a);
+	head_a = ft_lstfirst(*stack_a);
+	ft_printf("Stack a\n");
+	printlist_next(head_a);
+	ft_printf("\n");
+	ft_printf("Rotate a?\n");
+	rotate(stack_a); //uses malloc internally
+	head_a = ft_lstfirst(*stack_a);
+	printlist_next(head_a);
+	ft_printf("\n");
+	ft_printf("Reverse rotate a?\n");
+	reverse_rotate(stack_a); //uses malloc internally
+	head_a = ft_lstfirst(*stack_a);
+	printlist_next(head_a);
+	ft_printf("\n");
+	// free(head_a);
+	// free(head_b);
+	// ft_printf("clearing stuff.. unsuccesfully :S\n");
+	// ft_lstclear(stack_a);
+	// ft_lstclear(stack_b);
+	system("leaks pushswap");
 	return (0);
 }
