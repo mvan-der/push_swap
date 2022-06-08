@@ -1,0 +1,11 @@
+sa	swap a
+sb	swap b
+ss	sa + sb
+pa	push top b to top a
+pb	push top a to top b
+ra	rotate a
+rb	rotate b
+rr	ra + rb
+rra	reverse rotate a
+rrb	reverse rotate b
+rrr rra + rrb

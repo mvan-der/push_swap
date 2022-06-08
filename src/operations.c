@@ -6,7 +6,7 @@
 /*   By: mvan-der <mvan-der@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/07 13:00:09 by mvan-der      #+#    #+#                 */
-/*   Updated: 2022/06/07 16:12:41 by mvan-der      ########   odam.nl         */
+/*   Updated: 2022/06/08 12:32:47 by mvan-der      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	swap_top(t_list *top, t_list *new_top)
 	new_top->prev = NULL;
 }
 
-void	rotate(t_list **stack)
+void	rotate(t_list **stack, char c)
 {
 	t_list	*temp;
 	t_list	*new;
@@ -50,9 +50,13 @@ void	rotate(t_list **stack)
 	new = ft_lstnew(temp->content);
 	ft_lstadd_back(stack, new);
 	delete_first(stack, ft_lstfirst(*stack));
+	if ( c == 'a')
+		ft_printf("ra\n");
+	else if (c == 'b')
+		ft_printf("rb\n");
 }
 
-void	reverse_rotate(t_list **stack)
+void	reverse_rotate(t_list **stack, char c)
 {
 	t_list	*temp;
 	t_list	*new;
@@ -61,4 +65,8 @@ void	reverse_rotate(t_list **stack)
 	new = ft_lstnew(temp->content);
 	ft_lstadd_front(stack, new);
 	delete_last(stack, ft_lstlast(*stack));
+	if ( c == 'a')
+		ft_printf("rra\n");
+	else if (c == 'b')
+		ft_printf("rrb\n");
 }

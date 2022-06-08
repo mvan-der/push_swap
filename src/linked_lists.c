@@ -6,7 +6,7 @@
 /*   By: mvan-der <mvan-der@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/10 14:11:43 by mvan-der      #+#    #+#                 */
-/*   Updated: 2022/06/07 16:17:07 by mvan-der      ########   odam.nl         */
+/*   Updated: 2022/06/08 14:53:11 by mvan-der      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,65 +37,22 @@ int	main(int argc, char **argv)
 {
 	t_list	**stack_a;
 	t_list	**stack_b;
-	t_list	*head_a = NULL;
-	t_list	*head_b = NULL;
+	//some global struct with relevant info?
+	// t_info	storage;
 
 	if (argc == 1)
 		exit(EXIT_FAILURE);
 	stack_a = malloc(sizeof(t_list) * sizeof(t_list));
 	stack_b = malloc(sizeof(t_list) * sizeof(t_list));
-	stack_a = init_stack_a(stack_a, argv); //uses malloc internally
-	head_a = ft_lstfirst(*stack_a);
-	ft_printf("address head a: %p\n", &head_a);
-	while (*stack_a)
-	{
-		ft_printf("stack pointers: %p\n", &stack_a);
-		stack_a++;
-	}
-	ft_printf("Stack a\n");
-	ft_printf("Before top swap:\n");
-	printlist_next(ft_lstfirst(*stack_a));
-	ft_printf("\n");
-	printlist_prev(ft_lstlast(head_a));
-	ft_printf("\n");
-	if(head_a->next)
-	{
-		swap_top(ft_lstfirst(*stack_a), head_a->next);
-		head_a = ft_lstfirst(*stack_a);
-	}
-	ft_printf("After top swap:\n");
-	printlist_next(head_a);
-	ft_printf("\n");
-	//push top a to top b;
-	//copy first node in a to b, update head_b;
-	ft_printf("Push top a to top b\n");
-	push_top(stack_b, head_a); //uses malloc internally
-	head_b = ft_lstfirst(*stack_b);
-	ft_printf("address head b: %p\n", &head_b);
-	ft_printf("Stack b\n");
-	printlist_next(head_b);
-	ft_printf("\n");
-	//delete first node in a and update head_a;
-	delete_first(stack_a, head_a);
-	head_a = ft_lstfirst(*stack_a);
-	ft_printf("Stack a\n");
-	printlist_next(head_a);
-	ft_printf("\n");
-	ft_printf("Rotate a?\n");
-	rotate(stack_a); //uses malloc internally
-	head_a = ft_lstfirst(*stack_a);
-	printlist_next(head_a);
-	ft_printf("\n");
-	ft_printf("Reverse rotate a?\n");
-	reverse_rotate(stack_a); //uses malloc internally
-	head_a = ft_lstfirst(*stack_a);
-	printlist_next(head_a);
-	ft_printf("\n");
-	// free(head_a);
-	// free(head_b);
-	// ft_printf("clearing stuff.. unsuccesfully :S\n");
-	// ft_lstclear(stack_a);
-	// ft_lstclear(stack_b);
-	system("leaks pushswap");
+	stack_a = init_stack_a(stack_a, argv);
+	if (argc <= 11)
+		hardcoded_sort(stack_a, stack_b);
+	// push(stack_a, stack_b, 'b');
+	// swap(stack_a, 'a');
+	// rotate(stack_a, 'a');
+	// reverse_rotate(stack_a, 'a');
+	// rotate_2(stack_a, stack_b);
+	// rev_rot_2(stack_a, stack_b);
+	// ft_printf("%s", storage.result);
 	return (0);
 }

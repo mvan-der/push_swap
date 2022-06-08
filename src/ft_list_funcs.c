@@ -6,7 +6,7 @@
 /*   By: mvan-der <mvan-der@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/15 13:59:57 by mvan-der      #+#    #+#                 */
-/*   Updated: 2022/06/07 15:47:25 by mvan-der      ########   odam.nl         */
+/*   Updated: 2022/06/08 10:08:37 by mvan-der      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 		*lst = new;
 		return ;
 	}
-	first = malloc(sizeof(t_list));
-	if (!first)
-		return ;
 	first = ft_lstfirst(*lst);
 	new->next = first;
 	new->prev = NULL;
@@ -57,9 +54,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		*lst = new;
 		return ;
 	}
-	last = malloc(sizeof(t_list));
-	if (!last)
-		return ;
 	last = ft_lstlast(*lst);
 	last->next = new;
 	new->prev = last;
